@@ -1,4 +1,4 @@
-"""Ядро управления каталогом учебного интернет-магазина ShopFlow."""
+"""Ядро управления каталогом и ценообразованием интернет-магазина ShopFlow."""
 
 
 def add_product(catalog: dict[str, int], sku: str, quantity: int) -> None:
@@ -11,6 +11,16 @@ def add_product(catalog: dict[str, int], sku: str, quantity: int) -> None:
 def available(catalog: dict[str, int], sku: str) -> int:
     """Возвращает доступный остаток товара."""
     return catalog.get(sku, 0)
+
+
+def order_total(prices: dict[str, float], items: dict[str, int]) -> float:
+    """Рассчитывает стоимость заказа по текущему прайс-листу."""
+    total = 0.0
+    for sku, quantity in items.items():
+        if sku not in prices:
+            raise KeyError(f"Цена для {sku} не задана")
+        total += prices[sku] * quantity
+    return round(total, 2)
 
 
 def reserve_product(catalog: dict[str, int], sku: str, quantity: int) -> None:

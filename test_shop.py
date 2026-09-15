@@ -1,6 +1,6 @@
 import unittest
 
-from shop import add_product, available
+from shop import add_product, available, order_total
 
 
 class CatalogTests(unittest.TestCase):
@@ -13,6 +13,11 @@ class CatalogTests(unittest.TestCase):
     def test_add_product_rejects_non_positive_quantity(self) -> None:
         with self.assertRaises(ValueError):
             add_product({}, "BOOK-001", 0)
+
+    def test_order_total_uses_price_and_quantity(self) -> None:
+        prices = {"BOOK-001": 450.0, "BOOK-002": 300.0}
+        items = {"BOOK-001": 2, "BOOK-002": 1}
+        self.assertEqual(order_total(prices, items), 1200.0)
 
 
 if __name__ == "__main__":
