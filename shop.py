@@ -4,7 +4,7 @@
 def add_product(catalog: dict[str, int], sku: str, quantity: int) -> None:
     """Добавляет товар или увеличивает его остаток."""
     if quantity <= 0:
-        raise ValueError("Количество должно быть больше нуля")
+        raise ValueError("Количество товара должно быть больше нуля")
     catalog[sku] = catalog.get(sku, 0) + quantity
 
 
