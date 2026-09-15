@@ -1,4 +1,4 @@
-"""Базовая модель каталога учебного интернет-магазина ShopFlow."""
+"""Ядро управления каталогом учебного интернет-магазина ShopFlow."""
 
 
 def add_product(catalog: dict[str, int], sku: str, quantity: int) -> None:
