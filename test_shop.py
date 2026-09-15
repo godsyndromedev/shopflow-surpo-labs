@@ -1,6 +1,6 @@
 import unittest
 
-from shop import add_product, available, order_total
+from shop import add_product, available, export_stock_csv, order_total
 
 
 class CatalogTests(unittest.TestCase):
@@ -18,6 +18,10 @@ class CatalogTests(unittest.TestCase):
         prices = {"BOOK-001": 450.0, "BOOK-002": 300.0}
         items = {"BOOK-001": 2, "BOOK-002": 1}
         self.assertEqual(order_total(prices, items), 1200.0)
+
+    def test_export_stock_csv_has_stable_order(self) -> None:
+        catalog = {"BOOK-010": 1, "BOOK-002": 4}
+        self.assertEqual(export_stock_csv(catalog), "sku,quantity\nBOOK-002,4\nBOOK-010,1")
 
 
 if __name__ == "__main__":

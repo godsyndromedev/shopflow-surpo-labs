@@ -23,6 +23,13 @@ def order_total(prices: dict[str, float], items: dict[str, int]) -> float:
     return round(total, 2)
 
 
+def export_stock_csv(catalog: dict[str, int]) -> str:
+    """Формирует компактный CSV-отчёт по остаткам."""
+    lines = ["sku,quantity"]
+    lines.extend(f"{sku},{catalog[sku]}" for sku in sorted(catalog))
+    return "\n".join(lines)
+
+
 def reserve_product(catalog: dict[str, int], sku: str, quantity: int) -> None:
     """Резервирует товар для заказа и уменьшает свободный остаток."""
     if quantity <= 0:
