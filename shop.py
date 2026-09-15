@@ -30,6 +30,11 @@ def export_stock_csv(catalog: dict[str, int]) -> str:
     return "\n".join(lines)
 
 
+def low_stock(catalog: dict[str, int], threshold: int = 3) -> list[str]:
+    """Возвращает артикулы с остатком не выше заданного порога."""
+    return sorted(sku for sku, quantity in catalog.items() if quantity <= threshold)
+
+
 def reserve_product(catalog: dict[str, int], sku: str, quantity: int) -> None:
     """Резервирует товар для заказа и уменьшает свободный остаток."""
     if quantity <= 0:
